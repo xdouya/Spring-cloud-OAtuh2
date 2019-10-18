@@ -48,14 +48,15 @@ public class TestEndPointController {
 	}
 	
 	@RequestMapping(value = "/registry", method = RequestMethod.POST)
-    public void createUser(@RequestParam("username") String username, @RequestParam("password") String password) {
+    public void createUser(@RequestParam("username") String username, @RequestParam("password") String password,
+    		 @RequestParam("rolename") String rolenname) {
         if (StringUtils.isNotEmpty(username) && StringUtils.isNotEmpty(password)) {
-            userService.create(username, password);
+            userService.create(username, password, rolenname);
         }
     }
 	
     @PreAuthorize("hasAnyAuthority('ADMIN')")
-    @RequestMapping("/hello")
+    @RequestMapping("/hello/admin")
     public String testAuthority() {
         return "hello admin";
     }

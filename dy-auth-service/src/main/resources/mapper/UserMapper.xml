@@ -17,8 +17,8 @@
 			user.id, user.username, user.password, role.id, role.rolename
 		from 
 			user_role
-			left join user on user_role.user_id = user.id 
-			left join role on user_role.role_id = role.id 
+			left join user on user_role.username = user.username 
+			left join role on user_role.rolename = role.rolename
 		 where user.username=#{username}
 	</select>
 </mapper>
