@@ -24,6 +24,9 @@ import org.springframework.security.oauth2.provider.token.store.redis.RedisToken
 
 import com.dy.oauth.dao.UserServiceDetail;
 
+/**
+ * @author caiwl
+ */
 @Configuration
 @EnableAuthorizationServer
 public class AuthorizationServerConfiguration extends AuthorizationServerConfigurerAdapter {
@@ -53,7 +56,7 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
         return new RedisTokenStore(redisConnectionFactory);
     }
 
-    @Bean // 声明 ClientDetails实现
+    @Bean
     public ClientDetailsService clientDetailsService() {
         return new JdbcClientDetailsService(dataSource);
     }
@@ -75,7 +78,7 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
         tokenServices.setSupportRefreshToken(false);
         tokenServices.setClientDetailsService(endpoints.getClientDetailsService());
         tokenServices.setTokenEnhancer(endpoints.getTokenEnhancer());
-        tokenServices.setAccessTokenValiditySeconds((int)TimeUnit.DAYS.toSeconds(30)); // 30天
+        tokenServices.setAccessTokenValiditySeconds((int)TimeUnit.DAYS.toSeconds(30));
         endpoints.tokenServices(tokenServices);
     }
 
